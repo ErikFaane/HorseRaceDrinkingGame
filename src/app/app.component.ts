@@ -80,6 +80,8 @@ export class AppComponent {
   }
 
   addDrinkingBet() {
+
+    this.winner = false;
     // @ts-ignore
     let black = document.getElementById('myCheckbox1').checked;
     // @ts-ignore
@@ -99,6 +101,7 @@ export class AppComponent {
       this.players[this.amountOfPlayers].horseColor = "pink"
     } else {
       alert("Try again.. stupid ni");
+      return;
     }
     // @ts-ignore
     this.players[this.amountOfPlayers].drinkVal = document.getElementById('amount').value;
@@ -112,6 +115,7 @@ export class AppComponent {
   }
 
   async startSim() {
+    this.winningHorse = "";
     let tmp: boolean = true
     this.horses[0].progress = 0;
     this.horses[1].progress = 0;
@@ -119,10 +123,39 @@ export class AppComponent {
     this.horses[2].progress = 0;
     while (tmp) {
       await this.delay(1000);
-      this.horses[0].progress += (Math.floor(Math.random() * 1001)) / 10;
-      this.horses[1].progress += (Math.floor(Math.random() * 1001)) / 10;
-      this.horses[3].progress += (Math.floor(Math.random() * 1001)) / 10;
-      this.horses[2].progress += (Math.floor(Math.random() * 1001)) / 10;
+      let black = (Math.floor(Math.random() * 1001)) / 10;
+      let red = (Math.floor(Math.random() * 1001)) / 10;
+      let blue = (Math.floor(Math.random() * 1001)) / 10;
+      let pink = (Math.floor(Math.random() * 1001)) / 10;
+      this.horses[0].progress += black;
+      this.horses[1].progress += red;
+      this.horses[3].progress += blue;
+      this.horses[2].progress += pink;
+
+      if(black < 70 && black > 69){
+        this.horses[0].progress -= 100;
+      }
+      if(red < 70 && red > 69){
+        this.horses[1].progress -= 100;
+      }
+      if(blue < 70 && blue > 69){
+        this.horses[2].progress -= 100;
+      }
+      if(pink < 70 && pink > 69){
+        this.horses[3].progress -= 100;
+      }
+      if(black < 5 && black > 0){
+        this.horses[0].progress -= 100;
+      }
+      if(red < 5 && red > 0){
+        this.horses[1].progress -= 100;
+      }
+      if(blue < 5 && blue > 0){
+        this.horses[2].progress -= 100;
+      }
+      if(pink < 5 && pink > 0){
+        this.horses[3].progress -= 100;
+      }
       if (this.horses[0].progress > 1000 ||
         this.horses[1].progress > 1000 ||
         this.horses[2].progress > 1000 ||
@@ -143,6 +176,86 @@ export class AppComponent {
 
   delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  check(i: number) {
+    // @ts-ignore
+    let black = document.getElementById('myCheckbox1').checked;
+    // @ts-ignore
+    let red = document.getElementById('myCheckbox2').checked;
+    // @ts-ignore
+    let blue = document.getElementById('myCheckbox3').checked;
+    // @ts-ignore
+    let pink = document.getElementById('myCheckbox4').checked;
+
+    if (i == 0) {
+      if (red){
+        // @ts-ignore
+        document.getElementById('myCheckbox2').click();
+      }
+      if (blue){
+        // @ts-ignore
+        document.getElementById('myCheckbox3').click();
+      }
+      if (pink){
+        // @ts-ignore
+        document.getElementById('myCheckbox4').click();
+      }
+      red = false;
+      blue = false;
+      pink = false;
+    }
+    if (i == 1) {
+      if (black){
+        // @ts-ignore
+        document.getElementById('myCheckbox1').click();
+      }
+      if (blue){
+        // @ts-ignore
+        document.getElementById('myCheckbox3').click();
+      }
+      if (pink){
+        // @ts-ignore
+        document.getElementById('myCheckbox4').click();
+      }
+      black = false;
+      blue = false;
+      pink = false;
+    }
+    if (i == 2) {
+      if (red){
+        // @ts-ignore
+        document.getElementById('myCheckbox2').click();
+      }
+      if (black){
+        // @ts-ignore
+        document.getElementById('myCheckbox1').click();
+      }
+      if (pink){
+        // @ts-ignore
+        document.getElementById('myCheckbox4').click();
+      }
+      red = false;
+      black = false;
+      pink = false;
+    }
+    if (i == 3) {
+      if (red){
+        // @ts-ignore
+        document.getElementById('myCheckbox2').click();
+      }
+      if (blue){
+        // @ts-ignore
+        document.getElementById('myCheckbox3').click();
+      }
+      if (black){
+        // @ts-ignore
+        document.getElementById('myCheckbox1').click();
+      }
+      red = false;
+      blue = false;
+      black = false;
+    }
   }
 }
 

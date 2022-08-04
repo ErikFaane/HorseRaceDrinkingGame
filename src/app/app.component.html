@@ -36,32 +36,32 @@
   <br>
   <button class="quitButton" (click)="quitGame()">Quit Game</button>
 
-  <ul *ngIf="!start">
+  <ul *ngIf="!start" style="text-align: center">
     <li>
-      <input type="checkbox" id="myCheckbox1" />
-      <label for="myCheckbox1"><img src="../assets/images/black.png" style="height: 200px"></label>
+      <input type="checkbox" id="myCheckbox1" (click)="check(0)"/>
+      <label for="myCheckbox1"><img src="../assets/images/black.png" style="height: 200px; width: 250px" alt=""></label>
     </li>
     <li>
 
-      <input type="checkbox" id="myCheckbox2" />
-      <label for="myCheckbox2"><img src="../assets/images/red.png" style="height: 200px"></label>
+      <input type="checkbox" id="myCheckbox2" (click)="check(1)"/>
+      <label for="myCheckbox2"><img src="../assets/images/red.png" style="height: 200px; width: 250px" alt=""></label>
     </li>
     <li>
 
-      <input type="checkbox" id="myCheckbox3" />
-      <label for="myCheckbox3"><img src="../assets/images/blue.png" style="height: 200px"></label>
+      <input type="checkbox" id="myCheckbox3" (click)="check(2)"/>
+      <label for="myCheckbox3"><img src="../assets/images/blue.png" style="height: 200px; width: 250px" alt=""></label>
     </li>
     <li>
 
-      <input type="checkbox" id="myCheckbox4" />
-      <label for="myCheckbox4"><img src="../assets/images/pink.png" style="height: 200px"></label>
+      <input type="checkbox" id="myCheckbox4" (click)="check(3)" />
+      <label for="myCheckbox4"><img src="../assets/images/pink.png" style="height: 200px; width: 250px" alt=""></label>
     </li>
   </ul>
 
 
-  <p *ngIf="!start">{{players[amountOfPlayers].name}}'s turn..</p>
-  <p *ngIf="!start">Please select a horse and put a drinking bet!</p>
-  <form id="test2" *ngIf="!start">
+  <p *ngIf="!start" style="text-align: center">{{players[amountOfPlayers].name}}'s turn..</p>
+  <p *ngIf="!start" style="text-align: center">Please select a horse and put a drinking bet!</p>
+  <form id="test2" *ngIf="!start" style="text-align: center">
     <input type="number" id="amount" name="amount">
     <button type="button" (click)="addDrinkingBet()"
             style="cursor: pointer; box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;">
@@ -82,7 +82,7 @@
   <br>
   <br>
   <br>
-  <input class="slider" type="range" id="blue" value="{{horses[1].progress}}" max="1000" style=" width: 100%; background-image: url('../assets/images/blue.png');">
+  <input class="slider" type="range" id="blue" value="{{horses[1].progress}}" max="1000" style=" width: 100%;">
   <br> <br>
   <br>
   <input class="slider" type="range" id="pink" value="{{horses[2].progress}}" max="1000" style=" width: 100%">
@@ -92,10 +92,11 @@
 </div>
 <br><br><br>
 <div *ngIf="winner">
+  <img src="../assets/images/{{winningHorse}}.png" style="height: 200px; width: 250px">
   <p>Winners:</p>
   <div *ngFor="let player of players">
     <p *ngIf="player.horseColor == winningHorse">
-      Player {{player.name}} can give {{player.drinkVal}} sips!!
+      {{player.name}} can give {{player.drinkVal}} sips!!
     </p>
   </div>
   <br>
