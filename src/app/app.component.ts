@@ -42,13 +42,7 @@
 
 
     // @ts-ignore
-    players: Players[] = [
-      {
-        name: "Erik",
-        drinkVal: 0,
-        horseColor: "none"
-      },
-    ]
+    players: Players[] = []
 
 
     startGame() {
@@ -65,6 +59,9 @@
 
       // @ts-ignore
       let player = document.getElementById('name').value;
+      if (player == ""){
+        return
+      }
       this.players.push({
         name: player.toString(),
         drinkVal: 0,
@@ -76,7 +73,6 @@
       this.playingSwitch = false;
       this.start = false;
       this.winner = false;
-
     }
 
     addDrinkingBet() {
@@ -122,6 +118,13 @@
       this.horses[3].progress = 0;
       this.horses[2].progress = 0;
       while (tmp) {
+        if (!this.start){
+          this.horses[0].progress = 0;
+          this.horses[1].progress = 0;
+          this.horses[2].progress = 0;
+          this.horses[3].progress = 0;
+          return
+        }
         await this.delay(1000);
         let black = (Math.floor(Math.random() * 1001)) / 10;
         let red = (Math.floor(Math.random() * 1001)) / 10;
@@ -171,7 +174,10 @@
           }
         }
       }
-
+      this.horses[0].progress = 0;
+      this.horses[1].progress = 0;
+      this.horses[2].progress = 0;
+      this.horses[3].progress = 0;
     }
 
     delay(ms: number) {

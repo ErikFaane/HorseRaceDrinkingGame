@@ -10,15 +10,14 @@
 </div>
 
 <div class="mainMenu" *ngIf="playerSwitch">
-  <form id="test">
+  <form id="test" class="center">
     <input type="text" id="name" name="name">
-    <button type="button" (click)="addPlayer()"
-            style="cursor: pointer; box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;">
-      Submit
+    <button class="cybr-btn" (click)="addPlayer()" style="cursor: pointer;" type="button">
+      Submit<span aria-hidden></span>
+      <span aria-hidden class="cybr-btn__glitch">Submit</span>
     </button>
   </form>
 </div>
-
 
 
 <div class="mainMenu" *ngIf="playerSwitch">
@@ -30,11 +29,13 @@
 </div>
 
 
-
-
 <div class="gameTime" *ngIf="playingSwitch">
   <br>
-  <button class="quitButton" (click)="quitGame()">Quit Game</button>
+  <button class="cybr-btn" (click)="quitGame()" style="cursor: pointer;" type="button">
+    Quit game<span aria-hidden></span>
+    <span aria-hidden class="cybr-btn__glitch">Quit game</span>
+  </button>
+
 
   <ul *ngIf="!start" style="text-align: center">
     <li>
@@ -53,29 +54,29 @@
     </li>
     <li>
 
-      <input type="checkbox" id="myCheckbox4" (click)="check(3)" />
+      <input type="checkbox" id="myCheckbox4" (click)="check(3)"/>
       <label for="myCheckbox4"><img src="../assets/images/pink.png" style="height: 200px; width: 250px" alt=""></label>
     </li>
   </ul>
 
-
-  <p *ngIf="!start" style="text-align: center">{{players[amountOfPlayers].name}}'s turn..</p>
-  <p *ngIf="!start" style="text-align: center">Please select a horse and put a drinking bet!</p>
-  <form id="test2" *ngIf="!start" style="text-align: center">
-    <input type="number" id="amount" name="amount">
-    <button type="button" (click)="addDrinkingBet()"
-            style="cursor: pointer; box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;">
-      Submit
-    </button>
-  </form>
+  <div class="center">
+    <p *ngIf="!start">{{players[amountOfPlayers].name}}'s turn..</p>
+    <p *ngIf="!start">Please select a horse and put a drinking bet!</p>
+    <form id="test2" *ngIf="!start">
+      <input type="number" id="amount" name="amount">
+      <button class="cybr-btn" (click)="addDrinkingBet()" style="cursor: pointer;" type="button">
+        Submit<span aria-hidden></span>
+        <span aria-hidden class="cybr-btn__glitch">Submit</span>
+      </button>
+    </form>
+  </div>
 </div>
 
-
 <div *ngIf="start">
-  <br>
-  <br>
-  <br>
-  <button (click)="startSim()">Start round</button>
+  <button class="cybr-btn" (click)="startSim()" style="cursor: pointer;" type="button">
+    Start game<span aria-hidden></span>
+    <span aria-hidden class="cybr-btn__glitch">Start game</span>
+  </button>
   <br><br>
   <br>
   <input class="slider" type="range" id="black" value="{{horses[0].progress}}" max="1000" style=" width: 100%">
@@ -91,22 +92,22 @@
   <input class="slider" type="range" id="red" value="{{horses[2].progress}}" max="1000" style=" width: 100%; ">
 </div>
 <br><br><br>
-<div *ngIf="winner">
+<div *ngIf="winner" class="center">
   <img src="../assets/images/{{winningHorse}}.png" style="height: 200px; width: 250px">
   <p>Winners:</p>
   <div *ngFor="let player of players">
     <p *ngIf="player.horseColor == winningHorse">
-      {{player.name}} can give {{player.drinkVal}} sips!!
+      <span style="font-size: large; font-family: 'Cyber', sans-serif">{{player.name}}</span> can give <span style="font-size: large;  font-family: 'Cyber', sans-serif">{{player.drinkVal}}</span> sips!!
     </p>
   </div>
   <br>
 </div>
 
-<div *ngIf="winner">
+<div *ngIf="winner" class="center">
   <p>Losers:</p>
   <div *ngFor="let player of players">
     <p *ngIf="!(player.horseColor == winningHorse)">
-      Player {{player.name}} must drink {{player.drinkVal}} sips!!
+      <span style="font-size: large; font-family: 'Cyber', sans-serif">{{player.name}}</span> must drink <span style="font-size: large;  font-family: 'Cyber', sans-serif">{{player.drinkVal}}</span> sips!!
     </p>
   </div>
 </div>
